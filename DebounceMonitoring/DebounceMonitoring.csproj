@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Authors>SIDOVSKY</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/SIDOVSKY/DebounceMonitoring</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/SIDOVSKY/DebounceMonitoring.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Copyright>Vadim Sedov</Copyright>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageTags>debounce, throttle, click, touch, ui</PackageTags>
+    <Version>1.0.0</Version>
+    <Description>📑 Add debounce logic for any method in a single line.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\Assets\icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>
