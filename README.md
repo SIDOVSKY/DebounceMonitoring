@@ -2,6 +2,7 @@
 
 # DebounceMonitoring
 
+[![CI](https://github.com/SIDOVSKY/DebounceMonitoring/actions/workflows/ci.yml/badge.svg)](https://github.com/SIDOVSKY/DebounceMonitoring/actions/workflows/ci.yml)
 [![PLATFORM](https://img.shields.io/badge/platform-.NET%20Standard%202.0-lightgrey)](#DebounceMonitoring)
 [![NuGet](https://img.shields.io/nuget/v/DebounceMonitoring?logo=nuget)](https://www.nuget.org/packages/DebounceMonitoring/)
 
