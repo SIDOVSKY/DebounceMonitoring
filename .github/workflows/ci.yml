@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - '**/*.md'
+  pull_request:
+    paths-ignore:
+      - '**/*.md'
+
+jobs:
+  main:
+    name: Build, Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Test
+        id: unit-test
+        run: |
+          dotnet test --logger "trx;LogFileName=UnitTestResults.trx"
+          
+      - name: Prepare Unit Test Results
+        id: prepare-unit-test-results
+        if: ${{ !cancelled() && (steps.unit-test.outcome == 'success' || steps.unit-test.outcome == 'failure') }}
+        run: |
+          dotnet tool install --global trx2junit
+          trx2junit ./DebounceMonitoring.Tests/TestResults/UnitTestResults.trx
+
+      - name: Publish Unit Test Results
+        if: ${{ !cancelled() && steps.prepare-unit-test-results.outcome == 'success' }}
+        uses: docker://ghcr.io/enricomi/publish-unit-test-result-action:v1.9
+        with:
+          github_token: ${{ github.token }}
+          files: ./DebounceMonitoring.Tests/TestResults/UnitTestResults.xml
+          check_name: Unit Test Results
+          comment_on_pr: false
