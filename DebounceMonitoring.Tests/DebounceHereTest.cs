@@ -107,5 +107,31 @@ namespace DebounceMonitoring.Tests
 
             static bool SameLocationDebounce(DebouncingSample sample) => sample.DebounceHere();
         }
+
+        [Fact]
+        public void Should_Be_Thread_Safe_In_Debouncing_Second_Object_At_The_Same_Location()
+        {
+            var allDebounceResultsAsExpected = true;
+
+            var sample = new DebouncingSample();
+
+            for (int i = 0; i < 10000; i++)
+            {
+                SameLocationDebounce(sample);
+
+                Parallel.For(0, 10, new ParallelOptions { MaxDegreeOfParallelism = 10 }, _ =>
+                {
+                    var sample2 = new DebouncingSample();
+                    allDebounceResultsAsExpected &= !SameLocationDebounce(sample2);
+                    allDebounceResultsAsExpected &= SameLocationDebounce(sample2);
+                });
+
+                bool SameLocationDebounce(DebouncingSample sample) => sample.DebounceHere(
+                    memberName: nameof(Should_Be_Thread_Safe_In_Debouncing_Second_Object_At_The_Same_Location),
+                    lineNumber: i);
+            }
+
+            Assert.True(allDebounceResultsAsExpected, "All debounce results appeared as expected");
+        }
     }
 }
