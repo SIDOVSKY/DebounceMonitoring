@@ -11,8 +11,9 @@
     <Copyright>Vadim Sedov</Copyright>
     <PackageIcon>icon.png</PackageIcon>
     <PackageTags>debounce, throttle, click, touch, ui</PackageTags>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Description>📑 Add debounce logic for any method in a single line.</Description>
+    <PackageReleaseNotes>Thread-safety improvements</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
